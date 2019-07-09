@@ -1,13 +1,14 @@
 import React from "react";
 
-export default function Search({value,onChange,children}) {
+export default function Search({value,onChange,onSubmit,children}) {
     return (
-        <form>
+        <form  onSubmit={onSubmit}>
             {children}
             <input 
                 type="text"
                 value={value}
-                onChange={onChange} />
+                onChange={onChange}
+                />
         </form>
     )
 }

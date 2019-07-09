@@ -17,19 +17,28 @@ class App extends React.Component {
     }
     this.onDismiss=this.onDismiss.bind(this)
     this.onSearchChange=this.onSearchChange.bind(this)
+    this.onSearchSubmit=this.onSearchSubmit.bind(this)
     this.setSearchTopStories=this.setSearchTopStories.bind(this)
+    this.fetchSearchTopStories=this.fetchSearchTopStories.bind(this)
   }
+
   setSearchTopStories(result) {
     this.setState({result})
   }
 
-  componentDidMount() {
-    const {searchTerm}=this.state;
+  onSearchSubmit(event) {
+    const {searchTerm}=this.state
+    this.fetchSearchTopStories(searchTerm)
+    event.preventDefault()
+  }
+
+  fetchSearchTopStories(searchTerm) {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
     .then(res=>res.json())
     .then((result)=>this.setSearchTopStories(result))
     .catch(error=>error);
   }
+
   onDismiss(id) {
     const isNotId=item=>item.objectID!==id;
     const updatedList=this.state.result.hits.filter(isNotId)
@@ -39,7 +48,10 @@ class App extends React.Component {
     event.preventDefault()
     this.setState({searchTerm:event.target.value})
   }
-
+  componentDidMount() {
+    const {searchTerm}=this.state
+    this.fetchSearchTopStories(searchTerm)
+  }
   render() {
     const {searchTerm,result}=this.state
     
@@ -48,11 +60,11 @@ class App extends React.Component {
         <Search 
           value={searchTerm}
           onChange={this.onSearchChange}
+          onSubmit={this.onSearchSubmit}
           />
           {result ?
         <Table 
           list={result.hits}
-          pattern={searchTerm}
           onDismiss={this.onDismiss}
           /> : null}
       </div>
