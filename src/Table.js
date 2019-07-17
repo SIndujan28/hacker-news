@@ -3,7 +3,7 @@ import React from 'react'
 
 const Table=({list,onDismiss})=>{
     return (
-        <div>
+        <div className="flex-col">
         {/* <Trail
             items={list}
             keys={item => item.objectID}
@@ -17,18 +17,18 @@ const Table=({list,onDismiss})=>{
             )}
         </Trail> */}
         {list.map(item=>
-        <div key={item.objectID}>
-            <span>
+        <div className="rounded-full  min-w-full bg-gray-400 p-4 mb-4" key={item.objectID}>
+            <span className="font-black">
                 <a href={item.url}>{item.title}</a>
             </span>
-            <span>{item.author}</span>
-            <span>{item.num_comments}</span>
-            <span>Points</span>
-            <span>{item.points}</span>
+            <span className="p-1 italic">@{item.author}</span>
+            <span >{item.num_comments}</span>
+            <span className="p-1 font-normal">Points</span>
+            <span className="p-1 font-semibold">^{item.points}</span>
             <span>
-                <button 
+                <button className="inline-block bg-gray-500 hover:bg-gray-700 hover:text-white rounded-full px-1  float-right"
                     onClick={()=>onDismiss(item.objectID)}
-                    type="button">Dismiss</button>
+                    type="button">x</button>
             </span> 
         </div>
         )
