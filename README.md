@@ -1,5 +1,5 @@
 ## HACKERNEWS 
-A react app built using create-react-app which utilizes the hackernews API and displays various stories posted to hackernews.The stories list is paginated for better readability and cached to increase response time.Search functionality is also added which displays stories based on searcg query.
+A react app built using create-react-app which utilizes the hackernews API and displays various stories posted to hackernews.The stories list is paginated for better readability and cached to impprove response time of the application.Search functionality is also implemented which displays stories based on searched query.
 
 ## Modules used
 1. create-react-app
